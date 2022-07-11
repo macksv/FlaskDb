@@ -1,2 +1,20 @@
 Code from tutorial
 https://www.youtube.com/watch?v=Z1RJmh_OqeA
+
+To create DB from the app.py, run interactive python
+from app import db
+db.create_all()
+
+for testing, if the programs are importing modules which have a "_" like flask_restful, then pytest
+will complain of module not found. Alternative is test with :
+     python test_app.py -v
+
+
+
+Make sure Flask app has host defined as 0.0.0.0 and Debug=False
+create Dockerfile
+create Docker image by running:
+	docker build -t flask_app_docker:latest .	
+Test run Docker image:
+ 	docker run flask_app_docker:latest
+

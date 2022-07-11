@@ -1,13 +1,16 @@
+""" This flask program simulates a simple database for storing Reminders """
+
 from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///FlaskAppDB.db'
 db = SQLAlchemy(app)
 
 
-class Remember(db.Model):
+class Reminder(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(200), nullable=False)
     completed = db.Column(db.Integer, default=0)
@@ -21,7 +24,7 @@ class Remember(db.Model):
 def index():
     if request.method == "POST":
         task_content = request.form["content"]
-        new_task = Remember(content=task_content)
+        new_task = Reminder(content=task_content)
 
         try:
             db.session.add(new_task)
@@ -31,13 +34,13 @@ def index():
             return "There was an issue adding your task"
 
     else:
-        tasks = Remember.query.order_by(Remember.date_created).all()
+        tasks = Reminder.query.order_by(Reminder.date_created).all()
         return render_template("index.html", tasks=tasks)
 
 
 @app.route("/delete/<int:id>", methods=["GET", "POST"])
 def delete(id):
-    task_to_delete = Remember.query.get_or_404(id)
+    task_to_delete = Reminder.query.get_or_404(id)
 
     try:
         db.session.delete(task_to_delete)
@@ -49,7 +52,7 @@ def delete(id):
 
 @app.route("/update/<int:id>", methods=["GET", "POST"])
 def update(id):
-    task_to_update = Remember.query.get_or_404(id)
+    task_to_update = Reminder.query.get_or_404(id)
 
     if request.method == "POST":
         task_to_update.content = request.form["content"]
@@ -64,4 +67,8 @@ def update(id):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+#    app.run(debug=True)
+    # Heroku will set the PORT env variable for web traffic
+    port = os.environ.get("PORT", 5000)
+    app.run(debug=False, host="0.0.0.0", port=port)
+
