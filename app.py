@@ -67,8 +67,7 @@ def update(id):
 
 
 if __name__ == "__main__":
-#    app.run(debug=True)
+    #    app.run(debug=True)
     # Heroku will set the PORT env variable for web traffic
     port = os.environ.get("PORT", 5000)
     app.run(debug=False, host="0.0.0.0", port=port)
-
