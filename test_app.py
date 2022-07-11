@@ -1,3 +1,4 @@
+# Unit test for app
 import unittest
 from app import app
 
