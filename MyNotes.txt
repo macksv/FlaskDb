@@ -19,3 +19,7 @@ Test run Docker image:
  	docker run flask_app_docker:latest
 
 Deploying Docker image to Heroku using Github actions
+   - created new app in Heroku called flask-db-docker
+   - added step in yaml file for deploying docker image to Heroku
+   - setup HEROKU_API_KEY value in Github
+   - Final URL is https://flask-db-docker.herokuapp.com/
