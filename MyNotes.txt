@@ -18,3 +18,4 @@ create Docker image by running:
 Test run Docker image:
  	docker run flask_app_docker:latest
 
+Deploying Docker image to Heroku using Github actions
