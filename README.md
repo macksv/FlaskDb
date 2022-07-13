@@ -5,5 +5,5 @@ Github actions perform the following once a push or pull requests happen:
 * sets up the environment to run on (ie OS and the particular Python version)
 * installs the Python libraries the app requires as specified in requirements.txt
 * runs the unit test using pytest
-* if test pass, it pushes the Docker image to Heroku repository where the web pages are served
+* if test pass, it pushes the code plus Dockerfile to Heroku repository where the image is built and then web pages are served
 
