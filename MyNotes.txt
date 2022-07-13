@@ -23,3 +23,6 @@ Deploying Docker image to Heroku using Github actions
    - added step in yaml file for deploying docker image to Heroku
    - setup HEROKU_API_KEY value in Github
    - Final URL is https://flask-db-docker.herokuapp.com/
+
+ToDo:
+  Try deploying to AWS
